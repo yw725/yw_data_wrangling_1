@@ -1,0 +1,21 @@
+---
+title: "Data Import"
+author: "Yuning Wang"
+date: "9/17/2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+```
+
+## Load in a dataset
+
+```{r message=FALSE}
+## reads in a dataset
+#absolute path & relative path, use relative path!
+litters_data = read_csv(file = "./data/FAS_litters.csv")
+head(litters_data)
+```
