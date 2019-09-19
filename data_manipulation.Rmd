@@ -15,5 +15,44 @@ library(tidyverse)
 ```{r}
 litters_data = read.csv("./data/FAS_litters.csv")
 pups_data = read.csv(file = "./data/FAS_pups.csv")
+litters_data = janitor::clean_names(litters_data)
+pups_data = janitor::clean_names(pups_data)
 ```
 
+
+## Selecting
+```{r}
+select(litters_data, group, litter_number)
+select(litters_data, group, litter_number, gd0_weight)
+#select columns' names starts with "pups"
+select(litters_data, litter_number, gd0_weight, starts_with("pups"))
+
+select(litters_data, litter_number, group, gd0_weight)
+#starts from gd0_weight to pups_born_alive
+select(litters_data, litter_number, gd0_weight:pups_born_alive)
+#rename the column name of "group" to "GROUP" and select it
+select(litters_data, GROUP = group, litter_number)
+#renamen the data
+rename(litters_data, GROUP = group)
+```
+
+
+## Filtering !!!!
+
+```{r}
+# check if it's true
+filter(litters_data, group == "Con7")
+
+filter(litters_data, group == "Mod8")
+# Both character and numeric can use this
+filter(litters_data, gd_of_birth <= 20)
+# Find data that satisfy both conditions
+filter(litters_data, pups_born_alive < 6, gd_of_birth <= 20)
+# Choose the data whose name is listed in c()list
+filter(litters_data, group %in% c("Con7", "Con8"))
+
+#DON'T do this to filter missing data
+#filter(litters_data, !is.na(gd0_weight))
+#Recommend way to filter missing value data
+drop_na(litters_data, gd0_weight)
+```
