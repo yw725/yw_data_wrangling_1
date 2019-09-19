@@ -128,3 +128,11 @@ head(pulse_data, 5)
     ## 3 10022  58.5 male           14            3            8           NA
     ## 4 10026  72.7 male           20            6           18           16
     ## 5 10035  60.4 male            4            0            1            2
+
+## Export a result
+
+``` r
+mlb11_data_subset = read_excel(path = "data/mlb11.xlsx",range = "A1:D7")  
+## read the range and sheet--sheet = ""##
+write_csv(mlb11_data_subset, path = "./data/mlb_subset.csv")
+```
